@@ -1,0 +1,2 @@
+symbol,trade_type,entry_price,exit_price,lot_size,pnl,closed_at,opened_at,strategy,notes,stop_loss,target_price,commission
+XAUUSD,buy,4478.36,4506.4,1.2,33.65,2026.01.09 21:01:11,2026.01.09 12:01:57,,DIAAAAQQB73WRAX,,,
