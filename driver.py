@@ -68,12 +68,11 @@ def main():
         from_date=from_date,
         to_date=to_date
     )
-    print("Transactions saved to DF...")
-
     if transactions_df.empty:
-        print("No transactions found. Exiting...")
+        print("No transactions found for timeframe...")
         return
 
+    print(f"Transactions found: {len(transactions_df)}")
     # Clean transactions dataframe
     clean_df = ig_trades_fetcher.clean_df(transactions_df)
     print("Transactions cleaned...")
