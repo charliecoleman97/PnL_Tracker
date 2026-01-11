@@ -94,9 +94,11 @@ class IgTradesFetcher:
             all_transactions.extend(data.get('transactions', []))
 
         df = pd.DataFrame(all_transactions)
-        df = df[df['transactionType'] == 'DEAL']
-
-        return df
+        if df.empty:
+            return pd.DataFrame()
+        else:
+            df = df[df['transactionType'] == 'DEAL']
+            return df
 
     def clean_df(self, df: pd.DataFrame) -> pd.DataFrame:
         """

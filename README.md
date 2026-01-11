@@ -52,11 +52,24 @@ A Python tool to fetch and track trading transactions from IG (IG.com) API and f
    source ~/.zshrc
    ```
 
-   **Optional: `.env` file** (for local development convenience only):
+   **For development: `.env` file in `dev/` folder:**
 
-   If you prefer using a `.env` file for local development, you can create one. However, this is **not recommended** as it stores credentials in plain text. The code will automatically detect and use a `.env` file if it exists, but system environment variables take precedence.
+   The development script (`dev/fetch_trades_dev.py`) uses a `.env` file for convenience during development. To set this up:
 
-   **Important:** Never commit your `.env` file - it's gitignored for safety, but using system environment variables is more secure.
+   1. Copy the example file:
+      ```bash
+      cp dev/.env_example dev/.env
+      ```
+
+   2. Edit `dev/.env` and add your actual credentials:
+      ```
+      IG_USERNAME=your_actual_username
+      IG_PASSWORD=your_actual_password
+      IG_API_KEY=your_actual_api_key
+      TRADES_FILE_PATH=transaction_history_files/ig_transactions_formatted.csv
+      ```
+
+   The `.env` file is automatically ignored by git (see `.gitignore`). The main `driver.py` script still uses system environment variables only.
 
 ## Usage
 
@@ -99,18 +112,20 @@ PnL_Tracker/
 ├── requirements.txt          # Python dependencies
 ├── Makefile                  # Automation commands
 ├── .gitignore               # Git ignore rules
+├── dev/
+│   ├── fetch_trades_dev.py  # Development script (uses .env file)
+│   └── .env_example         # Example .env file template
 └── transaction_history_files/
     └── ig_transactions_formatted.csv  # Output file
 ```
 
 ## Security Notes
 
-- **Use system environment variables** - This is the recommended and most secure approach
-- Credentials are never stored in plain text files
-- System environment variables are loaded from your shell environment, not from files
-- The `.env` file is optional and only for local development convenience
-- If you use a `.env` file, it's automatically excluded from git via `.gitignore`
+- **Production (`driver.py`)**: Uses system environment variables only - the recommended and most secure approach
+- **Development (`dev/fetch_trades_dev.py`)**: Uses a `.env` file in the `dev/` folder for convenience
+- The `.env` file is automatically excluded from git via `.gitignore`
 - Never commit credentials in any form
+- System environment variables take precedence over `.env` file values if both are set
 
 ## Dependencies
 
